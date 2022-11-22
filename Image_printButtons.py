@@ -30,10 +30,23 @@ epd.Clear(0xFF)
 def printImage(string):
     logging.info("clear old image")
     epd.Clear(0xFF)
-    logging.info("read image file")
-    Himage = Image.open(os.path.join(libdir, 'images/' + string))
-    Himage.resize((176,264))
+    if(string[:4] != "text"):
+        logging.info("read image file")
+        Himage = Image.open(os.path.join(libdir, 'images/' + string))
+        Himage.resize((176,264))
+    else:
+        logging.info("writing important message")
+        Himage = Image.new('1', (epd.width, epd.height), 255)
+        draw = ImageDraw.draw(Himage)
+        if(string == "text"):
+            text = 'Frederik'
+        else:
+            text = 'Marino'
+        draw.text((2,0), text)
+        draw.text((20,50), 'is Gay')
     epd.display(epd.getbuffer(Himage))
+
+
 
 def handleBtnPress(btn):
     
@@ -45,8 +58,8 @@ def handleBtnPress(btn):
     switcher = {
         5: "BCG.png",
         6: "qr_wifi.png",
-        13: "BCG.png",
-        19: "qr_wifi.png"
+        13: "text",
+        19: "text2"
     }
     
     # get the string based on the passed in button and send it to printToDisplay()
