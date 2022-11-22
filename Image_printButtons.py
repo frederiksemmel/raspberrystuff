@@ -37,7 +37,7 @@ def printImage(string):
     else:
         logging.info("writing important message")
         Himage = Image.new('1', (epd.width, epd.height), 255)
-        draw = ImageDraw.draw(Himage)
+        draw = ImageDraw.Draw(Himage)
         if(string == "text"):
             text = 'Frederik'
         else:
