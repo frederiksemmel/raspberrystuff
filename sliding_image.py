@@ -28,7 +28,7 @@ try:
 
     
     logging.info("3.read bmp file")
-    Himage = Image.open(os.path.join(libdir, 'images/BCG.png'))
+    Himage = Image.open('BCG.png')
     epd.display(epd.getbuffer(Himage))
     time.sleep(20)
     
